@@ -1,5 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Question
+from .serializers import UserSerializer
+from django.contrib.auth.models import User
+from rest_framework import viewsets
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 def index(request):

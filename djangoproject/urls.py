@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('account.urls', namespace='account'))
+    path('api-auth/', include('rest_framework.urls')),
+    # 设置namespace会导致错误发生 Could not resolve URL for hyperlinked relationship using
+    # view name "user-detail". You may have failed to include the related model
+    # in your API, or incorrectly configured the `lookup_field` attribute on this field.
+    path('account/', include('account.urls', namespace='account')),
 ]
+
+
